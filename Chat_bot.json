@@ -1,0 +1,144 @@
+{
+  "name": "Chat bot",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -180,
+        -20
+      ],
+      "id": "81fda5c5-c4e7-49d2-8813-2ad4f55d61ba",
+      "name": "When chat message received",
+      "webhookId": "22b15ba8-a4de-4ecb-aa80-54f54f0d1b65"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        72,
+        -20
+      ],
+      "id": "3f9e8f91-9724-4cf3-8618-83de4c24f6cc",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        120,
+        240
+      ],
+      "id": "a670d5fd-20a8-49c9-922e-28d0892886b4",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolSerpApi",
+      "typeVersion": 1,
+      "position": [
+        280,
+        200
+      ],
+      "id": "65f73d8c-0eac-4f77-b461-009520ce9ceb",
+      "name": "SerpAPI",
+      "credentials": {
+        "serpApi": {
+          "id": "gOqS9SsF50189yIL",
+          "name": "SerpAPI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -60,
+        220
+      ],
+      "id": "fbc12cef-df66-40ac-87d1-13675499cd44",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "Yr24CgGJS6faEPyz",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SerpAPI": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "563a003c-d223-4fb4-befc-cf1fd596a07d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f80f39d6ea3ab04a3a31e836e8cdc94585b448d64af75da652d88178d2d7b574"
+  },
+  "id": "PVisdEGlAdlGTrLG",
+  "tags": []
+}
